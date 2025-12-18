@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pages of the Past</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #021024 0%, #052659 50%, #021024 100%); color: #C1E8FF; min-height: 100vh; overflow-x: hidden; }
+header { position: relative; padding: 1.5rem 4rem; display: flex; justify-content: space-between; align-items: center; background: rgba(2, 16, 36, 0.6); backdrop-filter: blur(10px); }
+.logo { font-size: 2rem; font-weight: 900; background: linear-gradient(135deg, #5483B3 0%, #7DA0CA 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: 1px; }
+nav { display: flex; gap: 3rem; }
+nav a { color: #C1E8FF; text-decoration: none; font-size: 0.95rem; font-weight: 500; text-transform: uppercase; letter-spacing: 2px; transition: all 0.3s; position: relative; }
+nav a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #7DA0CA; transition: width 0.3s; }
+nav a:hover::after { width: 100%; }
+nav a:hover { color: #7DA0CA; }
+.page-content { display: none; }
+.page-content.active { display: block; animation: fadeIn 0.6s ease-out; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+.hero-section { position: relative; min-height: 90vh; display: flex; align-items: center; padding: 0 4rem; overflow: hidden; }
+.hero-content { max-width: 600px; z-index: 2; }
+.hero-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 3px; color: #7DA0CA; margin-bottom: 1.5rem; font-weight: 600; }
+.hero-title { font-size: 6rem; font-weight: 900; color: #C1E8FF; line-height: 1; margin-bottom: 2rem; text-transform: uppercase; letter-spacing: -2px; }
+.hero-description { font-size: 1.1rem; color: #7DA0CA; line-height: 1.8; margin-bottom: 3rem; }
+.cta-button { display: inline-flex; align-items: center; gap: 1rem; padding: 1rem 2.5rem; background: transparent; border: 2px solid #5483B3; color: #C1E8FF; font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: all 0.4s; position: relative; overflow: hidden; }
+.cta-button::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(84, 131, 179, 0.3), transparent); transition: left 0.6s; }
+.cta-button:hover::before { left: 100%; }
+.cta-button:hover { border-color: #7DA0CA; transform: translateX(10px); }
+.cta-button .arrow { width: 24px; height: 24px; border: 2px solid currentColor; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+.hero-visual { position: absolute; right: -10%; top: 50%; transform: translateY(-50%); width: 700px; height: 700px; }
+.circle-large { position: absolute; width: 700px; height: 700px; border-radius: 50%; background: linear-gradient(135deg, rgba(84, 131, 179, 0.4) 0%, rgba(5, 38, 89, 0.6) 100%); box-shadow: 0 0 100px rgba(84, 131, 179, 0.3); }
+.circle-small { position: absolute; bottom: -100px; left: -100px; width: 300px; height: 300px; border-radius: 50%; background: linear-gradient(135deg, rgba(84, 131, 179, 0.3) 0%, rgba(5, 38, 89, 0.5) 100%); }
+.progress-bar { position: absolute; bottom: 4rem; left: 4rem; display: flex; align-items: center; gap: 1rem; }
+.progress-number { font-size: 0.9rem; color: #7DA0CA; font-weight: 600; }
+.progress-line { width: 80px; height: 2px; background: rgba(84, 131, 179, 0.3); position: relative; }
+.progress-line::after { content: ''; position: absolute; left: 0; top: 0; width: 40%; height: 100%; background: #7DA0CA; }
+.content-section { padding: 6rem 4rem; }
+.section-header { margin-bottom: 4rem; }
+.section-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 3px; color: #7DA0CA; margin-bottom: 1rem; font-weight: 600; }
+.section-title { font-size: 3.5rem; font-weight: 900; color: #C1E8FF; margin-bottom: 1.5rem; }
+.section-description { font-size: 1.1rem; color: #7DA0CA; max-width: 700px; }
+.cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2.5rem; }
+.card { background: linear-gradient(145deg, rgba(5, 38, 89, 0.4) 0%, rgba(2, 16, 36, 0.6) 100%); border: 1px solid rgba(84, 131, 179, 0.2); padding: 3rem; transition: all 0.5s; position: relative; overflow: hidden; }
+.card::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(84, 131, 179, 0.1), transparent); transition: left 0.6s; }
+.card:hover::before { left: 100%; }
+.card:hover { transform: translateY(-10px); border-color: #5483B3; box-shadow: 0 20px 60px rgba(84, 131, 179, 0.3); }
+.card-number { font-size: 0.75rem; color: #5483B3; font-weight: 700; letter-spacing: 2px; margin-bottom: 1.5rem; }
+.card h3 { font-size: 2rem; color: #C1E8FF; margin-bottom: 1.5rem; font-weight: 700; }
+.card p { color: #7DA0CA; line-height: 1.8; margin-bottom: 1.5rem; }
+.card .date { font-size: 0.9rem; color: #5483B3; font-weight: 600; letter-spacing: 1px; }
+.card-img { width: 100%; height: 300px; object-fit: cover; border-radius: 8px; margin-bottom: 1.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+.category-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 3rem; max-width: 1200px; margin: 4rem auto; }
+.category-card { background: linear-gradient(135deg, rgba(5, 38, 89, 0.5) 0%, rgba(2, 16, 36, 0.7) 100%); border: 2px solid rgba(84, 131, 179, 0.3); padding: 4rem 3rem; cursor: pointer; transition: all 0.5s; position: relative; overflow: hidden; }
+.category-card::after { content: ''; position: absolute; top: -50%; right: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(84, 131, 179, 0.15) 0%, transparent 70%); opacity: 0; transition: opacity 0.5s; }
+.category-card:hover::after { opacity: 1; }
+.category-card:hover { transform: scale(1.03); border-color: #5483B3; box-shadow: 0 25px 70px rgba(84, 131, 179, 0.4); }
+.category-icon { font-size: 3rem; margin-bottom: 1.5rem; }
+.category-card h3 { font-size: 2.5rem; color: #C1E8FF; margin-bottom: 1rem; font-weight: 700; position: relative; z-index: 1; }
+.category-card p { color: #7DA0CA; font-size: 1rem; line-height: 1.7; position: relative; z-index: 1; }
+footer { text-align: center; padding: 3rem; background: rgba(2, 16, 36, 0.8); border-top: 1px solid rgba(84, 131, 179, 0.2); color: #7DA0CA; }
+@media (max-width: 768px) { .hero-title { font-size: 3.5rem; } .category-grid { grid-template-columns: 1fr; } header { padding: 1rem 2rem; flex-direction: column; gap: 1rem; } nav { gap: 1.5rem; } .hero-section { padding: 2rem; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">PAGES</div>
+  <nav>
+    <a href="#" onclick="showPage('home')">HOME</a>
+    <a href="#" onclick="showPage('history')">HISTORY</a>
+    <a href="#" onclick="showPage('science')">SCIENCE</a>
+    <a href="#" onclick="showPage('philosophy')">PHILOSOPHY</a>
+    <a href="#" onclick="showPage('civilizations')">CIVILIZATIONS</a>
+  </nav>
+</header>
+
+<!-- Home Page -->
+<div id="home" class="page-content active">
+  <div class="hero-section">
+    <div class="hero-content">
+      <div class="hero-label">OUR MISSION</div>
+      <h1 class="hero-title">PAGES<br>OF THE<br>PAST</h1>
+      <p class="hero-description">Journey through time to explore humanity's greatest achievements. Discover the rulers who shaped empires, the scientists who unveiled nature's mysteries, the philosophers who questioned existence, and the civilizations that built our world.</p>
+      <button class="cta-button" onclick="showPage('history')">
+        <span class="arrow">→</span> Explore Now
+      </button>
+    </div>
+    <div class="hero-visual">
+      <div class="circle-large"></div>
+      <div class="circle-small"></div>
+    </div>
+    <div class="progress-bar">
+      <span class="progress-number">01</span>
+      <div class="progress-line"></div>
+      <span class="progress-number">04</span>
+    </div>
+  </div>
+  <div class="content-section">
+    <div class="category-grid">
+      <div class="category-card" onclick="showPage('history')">
+        <div class="category-icon">👑</div>
+        <h3>History</h3>
+        <p>Explore the lives of kings, queens, and rulers who changed the course of history and shaped the destiny of nations.</p>
+      </div>
+      <div class="category-card" onclick="showPage('science')">
+        <div class="category-icon">🔬</div>
+        <h3>Science</h3>
+        <p>Meet the brilliant minds whose groundbreaking discoveries revolutionized our understanding of the universe.</p>
+      </div>
+      <div class="category-card" onclick="showPage('philosophy')">
+        <div class="category-icon">💭</div>
+        <h3>Philosophy</h3>
+        <p>Delve into the profound wisdom of philosophers who pondered life's deepest questions and meaning.</p>
+      </div>
+      <div class="category-card" onclick="showPage('civilizations')">
+        <div class="category-icon">🏛️</div>
+        <h3>Civilizations</h3>
+        <p>Uncover the ancient societies that laid the foundations of modern culture and human progress.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- History Page -->
+<div id="history" class="page-content">
+  <div class="content-section">
+    <div class="section-header">
+      <div class="section-label">DISCOVER THE PAST</div>
+      <h2 class="section-title">Kings & Rulers</h2>
+      <p class="section-description">Journey through the annals of history to meet the monarchs and leaders who shaped empires, forged nations, and left an indelible mark on human civilization.</p>
+    </div>
+    <div class="cards-grid">
+      <div class="card">
+        <img src="https://smarthistory.org/wp-content/uploads/2024/08/munich-alexander.jpg" alt="Alexander the Great" class="card-img">
+        <div class="card-number">01</div>
+        <h3>Alexander the Great</h3>
+        <p>King of Macedonia who created one of the largest empires in ancient history, stretching from Greece to India. His military genius and strategic brilliance remain legendary throughout the ages.</p>
+        <div class="date">356 - 323 BCE</div>
+      </div>
+      <div class="card">
+        <img src="https://www.worldhistory.org/img/c/p/1200x900/318.jpg" alt="Cleopatra VII" class="card-img">
+        <div class="card-number">02</div>
+        <h3>Cleopatra VII</h3>
+        <p>The last active pharaoh of Ancient Egypt, known for her intelligence, political acumen, and relationships with Julius Caesar and Mark Antony that shaped Mediterranean politics.</p>
+        <div class="date">69 - 30 BCE</div>
+      </div>
+      <div class="card">
+        <img src="https://serious-science.org/img/2016/08/karl-3.jpg" alt="Charlemagne" class="card-img">
+        <div class="card-number">03</div>
+        <h3>Charlemagne</h3>
+        <p>King of the Franks who united much of Western Europe during the Middle Ages and was crowned Emperor of the Romans in 800 CE, establishing the foundation of modern Europe.</p>
+        <div class="date">742 - 814 CE</div>
+      </div>
+      <div class="card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Ashoka_pillar_at_Vaishali%2C_Bihar%2C_India.jpg/500px-Ashoka_pillar_at_Vaishali%2C_Bihar%2C_India.jpg" alt="Ashoka the Great" class="card-img">
+        <div class="card-number">04</div>
+        <h3>Ashoka the Great</h3>
+        <p>Indian emperor of the Maurya Dynasty who, after witnessing the horrors of war, embraced Buddhism and promoted peace, non-violence, and tolerance throughout his vast empire.</p>
+        <div class="date">304 - 232 BCE</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Science Page -->
+<div id="science" class="page-content">
+  <div class="content-section">
+    <div class="section-header">
+      <div class="section-label">PIONEERS OF KNOWLEDGE</div>
+      <h2 class="section-title">Great Scientists</h2>
+      <p class="section-description">Meet the visionary minds whose groundbreaking discoveries illuminated the mysteries of our universe and transformed our understanding of nature, reality, and existence itself.</p>
+    </div>
+    <div class="cards-grid">
+      <div class="card">
+        <img src="https://cdn.britannica.com/56/59856-050-AAA3AA05/Godfrey-Kneller-Isaaac-Newton-oil-painting-National-1702.jpg?w=400&h=225&c=crop" alt="Isaac Newton" class="card-img">
+        <div class="card-number">01</div>
+        <h3>Isaac Newton</h3>
+        <p>English mathematician and physicist who formulated the laws of motion and universal gravitation, laying the groundwork for classical mechanics and revolutionizing scientific thought.</p>
+        <div class="date">1643 - 1727</div>
+      </div>
+      <div class="card">
+        <img src="https://media.franceintheus.org/wp-content/uploads/2000/01/marie_curie.jpg" alt="Marie Curie" class="card-img">
+        <div class="card-number">02</div>
+        <h3>Marie Curie</h3>
+        <p>Pioneering physicist and chemist who conducted groundbreaking research on radioactivity. First woman to win a Nobel Prize and the only person to win Nobel Prizes in two different sciences.</p>
+        <div class="date">1867 - 1934</div>
+      </div>
+      <div class="card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Portrait_of_Albert_Einstein_and_Others_%281879-1955%29%2C_Physicist_-_Restoration1.jpg" alt="Albert Einstein" class="card-img">
+        <div class="card-number">03</div>
+        <h3>Albert Einstein</h3>
+        <p>Theoretical physicist who developed the theory of relativity, one of the two pillars of modern physics. His equation E=mc² revolutionized our understanding of energy, mass, and space-time.</p>
+        <div class="date">1879 - 1955</div>
+      </div>
+      <div class="card">
+        <img src="https://www.thoughtco.com/thmb/g50VHaxCTluNkag1rq1pCJ1cDRU=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Charles-Darwin-3000-3x2gty-58b9982e5f9b58af5c6a277f.jpg" alt="Charles Darwin" class="card-img">
+        <div class="card-number">04</div>
+        <h3>Charles Darwin</h3>
+        <p>English naturalist who established the theory of evolution through natural selection, fundamentally changing our understanding of life on Earth and humanity's place in nature.</p>
+        <div class="date">1809 - 1882</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Philosophy Page -->
+<div id="philosophy" class="page-content">
+  <div class="content-section">
+    <div class="section-header">
+      <div class="section-label">SEEKERS OF WISDOM</div>
+      <h2 class="section-title">Great Philosophers</h2>
+      <p class="section-description">Explore the profound thoughts of philosophical giants who questioned the nature of existence, meaning, morality, and truth, shaping the intellectual foundations of human civilization.</p>
+    </div>
+    <div class="cards-grid">
+      <div class="card">
+        <img src="https://d1nn9x4fgzyvn4.cloudfront.net/styles/scaled_780_wide/s3/2021-08/SC192857_4x3.jpg?itok=DaGqjfJu" alt="Socrates" class="card-img">
+        <div class="card-number">01</div>
+        <h3>Socrates</h3>
+        <p>Ancient Greek philosopher credited as the founder of Western philosophy. Famous for the Socratic method of questioning and his profound assertion that "the unexamined life is not worth living."</p>
+        <div class="date">470 - 399 BCE</div>
+      </div>
+      <div class="card">
+        <img src="https://www.worldhistory.org/img/c/p/1200x900/969.jpg" alt="Confucius" class="card-img">
+        <div class="card-number">02</div>
+        <h3>Confucius</h3>
+        <p>Chinese philosopher whose teachings on morality, social relationships, justice, and sincerity formed the basis of Confucianism, profoundly influencing East Asian culture for millennia.</p>
+        <div class="date">551 - 479 BCE</div>
+      </div>
+      <div class="card">
+        <img src="https://i.etsystatic.com/37692861/r/il/e654bc/4593992631/il_fullxfull.4593992631_cwpy.jpg" alt="Aristotle" class="card-img">
+        <div class="card-number">03</div>
+        <h3>Aristotle</h3>
+        <p>Greek philosopher and polymath whose writings covered physics, biology, zoology, metaphysics, logic, ethics, aesthetics, poetry, and politics. His work shaped Western intellectual tradition.</p>
+        <div class="date">384 - 322 BCE</div>
+      </div>
+      <div class="card">
+        <img src="http://www.versobooks.com/cdn/shop/articles/immanuel-kant-3e8cdb504e54db4797e7c5f5e46f0d0d.jpg?v=1677640244" alt="Immanuel Kant" class="card-img">
+        <div class="card-number">04</div>
+        <h3>Immanuel Kant</h3>
+        <p>German philosopher who argued that reason is the source of morality. His Critique of Pure Reason sought to unite reason with experience to transcend the failures of traditional philosophy.</p>
+        <div class="date">1724 - 1804</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Civilizations Page -->
+<div id="civilizations" class="page-content">
+  <div class="content-section">
+    <div class="section-header">
+      <div class="section-label">ANCIENT WORLDS</div>
+      <h2 class="section-title">Lost Civilizations</h2>
+      <p class="section-description">Journey to the ancient worlds that built the foundations of human civilization, creating architectural marvels, sophisticated societies, and cultural legacies that endure to this day.</p>
+    </div>
+    <div class="cards-grid">
+      <div class="card">
+        <img src="https://cdn.britannica.com/26/171026-050-11CE446C/Great-Sphinx-of-Giza-pyramid-background-Khafre.jpg" alt="Ancient Egypt" class="card-img">
+        <div class="card-number">01</div>
+        <h3>Ancient Egypt</h3>
+        <p>One of the world's oldest civilizations, known for magnificent pyramids, powerful pharaohs, intricate hieroglyphics, and remarkable advances in architecture, mathematics, and medicine along the Nile.</p>
+        <div class="date">c. 3100 - 30 BCE</div>
+      </div>
+      <div class="card">
+        <img src="https://cdn.britannica.com/08/150008-050-D5A45539/Ziggurat-Ur.jpg" alt="Mesopotamia" class="card-img">
+        <div class="card-number">02</div>
+        <h3>Mesopotamia</h3>
+        <p>The "Cradle of Civilization" between the Tigris and Euphrates rivers. Home to the Sumerians who invented writing (cuneiform), the wheel, irrigation systems, and established the first cities.</p>
+        <div class="date">c. 3500 - 539 BCE</div>
+      </div>
+      <div class="card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/d/da/The_Parthenon_in_Athens.jpg" alt="Ancient Greece" class="card-img">
+        <div class="card-number">03</div>
+        <h3>Ancient Greece</h3>
+        <p>Birthplace of Western philosophy, democracy, theater, and the Olympic Games. Greek culture profoundly influenced Western civilization through revolutionary art, architecture, and thought.</p>
+        <div class="date">c. 800 - 146 BCE</div>
+      </div>
+      <div class="card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/1200px-Colosseo_2020.jpg" alt="Roman Empire" class="card-img">
+        <div class="card-number">04</div>
+        <h3>Roman Empire</h3>
+        <p>One of history's greatest empires, renowned for engineering marvels like aqueducts, roads, and the Colosseum. Roman law, governance, and Latin language shaped Western civilization.</p>
+        <div class="date">27 BCE - 476 CE</div>
+      </div>
+      <div class="card">
+        <img src="https://i.natgeofe.com/n/c20d01e3-b521-4447-a4cc-e736ebde6439/24712.jpg" alt="Indus Valley" class="card-img">
+        <div class="card-number">05</div>
+        <h3>Indus Valley</h3>
+        <p>Advanced Bronze Age civilization known for sophisticated urban planning, advanced drainage systems, standardized weights and measures. Flourished in present-day Pakistan and northwest India.</p>
+        <div class="date">c. 3300 - 1300 BCE</div>
+      </div>
+      <div class="card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Chichen_Itza_3.jpg" alt="Maya Civilization" class="card-img">
+        <div class="card-number">06</div>
+        <h3>Maya Civilization</h3>
+        <p>Mesoamerican civilization known for hieroglyphic script, stunning art and architecture, advanced mathematics, precise calendar systems, and sophisticated astronomical knowledge.</p>
+        <div class="date">c. 2000 BCE - 1500 CE</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2024 Pages of the Past. Preserving History, Science, Philosophy & Civilization.</p>
+</footer>
+
+<script>
+function showPage(pageId) {
+  const pages = document.querySelectorAll('.page-content');
+  pages.forEach(page => page.classList.remove('active'));
+  const selectedPage = document.getElementById(pageId);
+  if (selectedPage) {
+    selectedPage.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+</script>
+</body>
+</html>
