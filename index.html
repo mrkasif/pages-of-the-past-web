@@ -3,318 +3,578 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pages of the Past</title>
+<title>Pages of the Past *** A Dark Archive Of History ***</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Creepster&family=Special+Elite&display=swap" rel="stylesheet">
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #021024 0%, #052659 50%, #021024 100%); color: #C1E8FF; min-height: 100vh; overflow-x: hidden; }
-header { position: relative; padding: 1.5rem 4rem; display: flex; justify-content: space-between; align-items: center; background: rgba(2, 16, 36, 0.6); backdrop-filter: blur(10px); }
-.logo { font-size: 2rem; font-weight: 900; background: linear-gradient(135deg, #5483B3 0%, #7DA0CA 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: 1px; }
-nav { display: flex; gap: 3rem; }
-nav a { color: #C1E8FF; text-decoration: none; font-size: 0.95rem; font-weight: 500; text-transform: uppercase; letter-spacing: 2px; transition: all 0.3s; position: relative; }
-nav a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #7DA0CA; transition: width 0.3s; }
-nav a:hover::after { width: 100%; }
-nav a:hover { color: #7DA0CA; }
-.page-content { display: none; }
-.page-content.active { display: block; animation: fadeIn 0.6s ease-out; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-.hero-section { position: relative; min-height: 90vh; display: flex; align-items: center; padding: 0 4rem; overflow: hidden; }
-.hero-content { max-width: 600px; z-index: 2; }
-.hero-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 3px; color: #7DA0CA; margin-bottom: 1.5rem; font-weight: 600; }
-.hero-title { font-size: 6rem; font-weight: 900; color: #C1E8FF; line-height: 1; margin-bottom: 2rem; text-transform: uppercase; letter-spacing: -2px; }
-.hero-description { font-size: 1.1rem; color: #7DA0CA; line-height: 1.8; margin-bottom: 3rem; }
-.cta-button { display: inline-flex; align-items: center; gap: 1rem; padding: 1rem 2.5rem; background: transparent; border: 2px solid #5483B3; color: #C1E8FF; font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: all 0.4s; position: relative; overflow: hidden; }
-.cta-button::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(84, 131, 179, 0.3), transparent); transition: left 0.6s; }
-.cta-button:hover::before { left: 100%; }
-.cta-button:hover { border-color: #7DA0CA; transform: translateX(10px); }
-.cta-button .arrow { width: 24px; height: 24px; border: 2px solid currentColor; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
-.hero-visual { position: absolute; right: -10%; top: 50%; transform: translateY(-50%); width: 700px; height: 700px; }
-.circle-large { position: absolute; width: 700px; height: 700px; border-radius: 50%; background: linear-gradient(135deg, rgba(84, 131, 179, 0.4) 0%, rgba(5, 38, 89, 0.6) 100%); box-shadow: 0 0 100px rgba(84, 131, 179, 0.3); }
-.circle-small { position: absolute; bottom: -100px; left: -100px; width: 300px; height: 300px; border-radius: 50%; background: linear-gradient(135deg, rgba(84, 131, 179, 0.3) 0%, rgba(5, 38, 89, 0.5) 100%); }
-.progress-bar { position: absolute; bottom: 4rem; left: 4rem; display: flex; align-items: center; gap: 1rem; }
-.progress-number { font-size: 0.9rem; color: #7DA0CA; font-weight: 600; }
-.progress-line { width: 80px; height: 2px; background: rgba(84, 131, 179, 0.3); position: relative; }
-.progress-line::after { content: ''; position: absolute; left: 0; top: 0; width: 40%; height: 100%; background: #7DA0CA; }
-.content-section { padding: 6rem 4rem; }
-.section-header { margin-bottom: 4rem; }
-.section-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 3px; color: #7DA0CA; margin-bottom: 1rem; font-weight: 600; }
-.section-title { font-size: 3.5rem; font-weight: 900; color: #C1E8FF; margin-bottom: 1.5rem; }
-.section-description { font-size: 1.1rem; color: #7DA0CA; max-width: 700px; }
-.cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2.5rem; }
-.card { background: linear-gradient(145deg, rgba(5, 38, 89, 0.4) 0%, rgba(2, 16, 36, 0.6) 100%); border: 1px solid rgba(84, 131, 179, 0.2); padding: 3rem; transition: all 0.5s; position: relative; overflow: hidden; }
-.card::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(84, 131, 179, 0.1), transparent); transition: left 0.6s; }
-.card:hover::before { left: 100%; }
-.card:hover { transform: translateY(-10px); border-color: #5483B3; box-shadow: 0 20px 60px rgba(84, 131, 179, 0.3); }
-.card-number { font-size: 0.75rem; color: #5483B3; font-weight: 700; letter-spacing: 2px; margin-bottom: 1.5rem; }
-.card h3 { font-size: 2rem; color: #C1E8FF; margin-bottom: 1.5rem; font-weight: 700; }
-.card p { color: #7DA0CA; line-height: 1.8; margin-bottom: 1.5rem; }
-.card .date { font-size: 0.9rem; color: #5483B3; font-weight: 600; letter-spacing: 1px; }
-.card-img { width: 100%; height: 300px; object-fit: cover; border-radius: 8px; margin-bottom: 1.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-.category-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 3rem; max-width: 1200px; margin: 4rem auto; }
-.category-card { background: linear-gradient(135deg, rgba(5, 38, 89, 0.5) 0%, rgba(2, 16, 36, 0.7) 100%); border: 2px solid rgba(84, 131, 179, 0.3); padding: 4rem 3rem; cursor: pointer; transition: all 0.5s; position: relative; overflow: hidden; }
-.category-card::after { content: ''; position: absolute; top: -50%; right: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(84, 131, 179, 0.15) 0%, transparent 70%); opacity: 0; transition: opacity 0.5s; }
-.category-card:hover::after { opacity: 1; }
-.category-card:hover { transform: scale(1.03); border-color: #5483B3; box-shadow: 0 25px 70px rgba(84, 131, 179, 0.4); }
-.category-icon { font-size: 3rem; margin-bottom: 1.5rem; }
-.category-card h3 { font-size: 2.5rem; color: #C1E8FF; margin-bottom: 1rem; font-weight: 700; position: relative; z-index: 1; }
-.category-card p { color: #7DA0CA; font-size: 1rem; line-height: 1.7; position: relative; z-index: 1; }
-footer { text-align: center; padding: 3rem; background: rgba(2, 16, 36, 0.8); border-top: 1px solid rgba(84, 131, 179, 0.2); color: #7DA0CA; }
-@media (max-width: 768px) { .hero-title { font-size: 3.5rem; } .category-grid { grid-template-columns: 1fr; } header { padding: 1rem 2rem; flex-direction: column; gap: 1rem; } nav { gap: 1.5rem; } .hero-section { padding: 2rem; } }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Special Elite", "Courier New", monospace;
+    background-color: #0a0000;
+    background-image:
+      linear-gradient(rgba(139,0,0,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(139,0,0,0.05) 1px, transparent 1px);
+    background-size: 26px 26px;
+    color: #c9b37e;
+    cursor: crosshair;
+    text-align: center;
+  }
+  a { color: #ff6347; }
+  a:visited { color: #8b008b; }
+  a:hover { color: #ff0000; text-decoration: none; }
+  h1, h2, h3 { font-family: "Creepster", "Courier New", cursive; font-weight: normal; }
+  .blink { animation: blink 1s step-start infinite; }
+  @keyframes blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+  .flicker { animation: flicker 3s linear infinite; }
+  @keyframes flicker {
+    0%, 19%, 21%, 23%, 54%, 56%, 100% { opacity: 1; }
+    20%, 22%, 55% { opacity: 0.4; }
+  }
+  .bloodbar { height: 12px; border: 0; background: linear-gradient(to right, #1a0000, #8b0000, #ff0000, #8b0000, #1a0000); }
+  .hazard { height: 26px; background: repeating-linear-gradient(45deg, #1a1a00 0 14px, #000000 14px 28px); border: 2px solid #8b0000; color: #ffd700; font-weight: bold; font-size: 14px; line-height: 26px; letter-spacing: 2px; }
+
+  #container { max-width: 920px; margin: 0 auto; padding: 15px; }
+
+  .title-main { font-size: 52px; color: #ff0000; text-shadow: 0 0 8px #8b0000, 0 0 20px #ff0000, 3px 3px 0 #000; letter-spacing: 2px; line-height: 1.05; }
+  .subtitle { font-size: 15px; color: #c9b37e; }
+  .case-no { font-size: 13px; color: #8b0000; letter-spacing: 2px; }
+
+  .retro-table { border: 4px outset #5a0000; background: #0d0505; padding: 10px; margin: 10px auto; }
+  .retro-table td { border: 2px ridge #5a0000; padding: 8px; }
+
+  .navtable { width: 100%; background: #8b0000; border: 4px outset #5a0000; }
+  .navtable td { background: #0d0505; color: #c9b37e; font-size: 14px; font-weight: bold; text-align: center; }
+  .navtable a { color: #c9b37e; text-decoration: underline; }
+  .navtable a:hover { color: #ff0000; background: #1a0000; }
+
+  .page-content { display: none; }
+  .page-content.active { display: block; }
+
+  .box { border: 4px inset #5a0000; background: #0d0505; padding: 10px; margin: 12px auto; text-align: left; }
+  .box-title { background: #8b0000; color: #ffd700; font-weight: bold; padding: 3px 8px; text-align: center; letter-spacing: 1px; }
+
+  .file { border: 4px outset #5a0000; background: #0d0505; margin: 14px auto; text-align: left; box-shadow: 0 0 14px rgba(139,0,0,0.35); }
+  .file img { float: left; width: 190px; height: 130px; object-fit: cover; border: 3px double #8b0000; margin: 10px 12px 6px 10px; filter: sepia(0.6) contrast(1.05); }
+  .file::after { content: ""; display: block; clear: both; }
+  .file-head { background: #2a0000; color: #ffd700; font-family: "Creepster", cursive; font-size: 18px; letter-spacing: 1px; padding: 3px 10px; }
+  .file-head .fno { color: #8b0000; }
+  .file-row { padding: 2px 10px; font-size: 12.5px; color: #c9b37e; }
+  .file-label { color: #ff6347; font-weight: bold; }
+  .file-status { color: #00ff00; }
+  .file-status.dead { color: #ff0000; }
+  .threat { color: #ff0000; letter-spacing: 2px; }
+  .threat.low { color: #8b0000; }
+
+  .section-title { font-family: "Creepster", cursive; font-size: 34px; color: #ff0000; text-shadow: 0 0 10px #8b0000, 2px 2px 0 #000; }
+  .section-label { color: #ff6347; font-weight: bold; font-size: 13px; letter-spacing: 3px; }
+  .herodesc { color: #c9b37e; font-size: 14px; max-width: 720px; margin: 10px auto; }
+
+  .counter { display: inline-block; background: #000000; border: 3px inset #3d0000; padding: 3px 6px; font-family: "Courier New", monospace; color: #00ff00; font-size: 20px; font-weight: bold; letter-spacing: 4px; text-shadow: 0 0 6px #00ff00; }
+  .counter span { background: #001100; color: #00ff00; padding: 2px 3px; margin: 0 1px; border: 1px solid #003300; }
+
+  .badge { display: inline-block; border: 3px outset #5a0000; background: #0d0505; color: #ffd700; padding: 7px 10px; margin: 6px; font-size: 12px; font-weight: bold; text-align: center; }
+  .badge.blood { color: #ff0000; }
+
+  .webring { border: 4px inset #5a0000; background: #0d0505; color: #c9b37e; padding: 8px; margin: 12px auto; text-align: center; }
+  .webring-title { background: #8b0000; color: #ffd700; font-weight: bold; padding: 2px 8px; }
+
+  .guestbook-entry { border: 2px ridge #5a0000; background: #0d0505; margin: 6px 0; padding: 6px; text-align: left; font-size: 13px; }
+  .guestbook-entry .who { color: #ff6347; font-weight: bold; }
+  .guestbook-entry .when { color: #8b0000; font-size: 11px; }
+  .guestbook-entry .msg { color: #c9b37e; }
+
+  input, textarea { background: #1a1a1a; color: #c9b37e; font-family: "Special Elite", "Courier New", monospace; border: 2px inset #5a0000; }
+  button { background: #8b0000; color: #ffd700; font-family: "Creepster", cursive; font-size: 15px; border: 3px outset #5a0000; padding: 5px 12px; cursor: pointer; letter-spacing: 1px; }
+  button:active { border-style: inset; }
+
+  .footer { color: #8b0000; font-size: 13px; margin-top: 15px; }
+  .footer a { color: #8b0000; }
+  .stars { color: #8b0000; letter-spacing: 6px; }
+
+  .catalogue { width: 100%; border-collapse: collapse; }
+  .catalogue td { border: 2px ridge #5a0000; background: #0d0505; padding: 5px 8px; font-size: 12.5px; cursor: pointer; text-align: left; }
+  .catalogue td:hover { background: #2a0000; }
+  .catalogue .fno { color: #8b0000; font-weight: bold; }
+  .catalogue .name { color: #ffd700; }
+  .catalogue .cls { color: #c9b37e; }
+  .catalogue .lvl { color: #ff0000; text-align: right; }
+
+  .cat-table { width: 100%; }
+  .cat-table td { border: 4px outset #5a0000; background: #0d0505; text-align: center; padding: 12px; cursor: pointer; width: 25%; }
+  .cat-table td:hover { background: #2a0000; box-shadow: inset 0 0 30px rgba(255,0,0,0.2); }
+  .cat-table h3 { color: #ff0000; font-size: 22px; text-shadow: 0 0 8px #8b0000; }
+  .cat-table p { color: #c9b37e; font-size: 12px; }
+  .cat-symbol { color: #ffd700; font-size: 30px; }
+
+  .divider { color: #8b0000; letter-spacing: 4px; margin: 12px 0; font-weight: bold; }
+
+  .whatsnew td { border: 2px ridge #5a0000; background: #0d0505; text-align: left; }
+  .whatsnew .new { color: #ff0000; font-weight: bold; }
+  .whatsnew .date { color: #ffd700; font-weight: bold; }
+  .whatsnew .item { color: #c9b37e; }
+
+  .seal { font-size: 40px; color: #8b0000; text-shadow: 0 0 12px #ff0000; }
 </style>
 </head>
 <body>
-<header>
-  <div class="logo">PAGES</div>
-  <nav>
-    <a href="#" onclick="showPage('home')">HOME</a>
-    <a href="#" onclick="showPage('history')">HISTORY</a>
-    <a href="#" onclick="showPage('science')">SCIENCE</a>
-    <a href="#" onclick="showPage('philosophy')">PHILOSOPHY</a>
-    <a href="#" onclick="showPage('civilizations')">CIVILIZATIONS</a>
-  </nav>
-</header>
 
-<!-- Home Page -->
-<div id="home" class="page-content active">
-  <div class="hero-section">
-    <div class="hero-content">
-      <div class="hero-label">OUR MISSION</div>
-      <h1 class="hero-title">PAGES<br>OF THE<br>PAST</h1>
-      <p class="hero-description">Journey through time to explore humanity's greatest achievements. Discover the rulers who shaped empires, the scientists who unveiled nature's mysteries, the philosophers who questioned existence, and the civilizations that built our world.</p>
-      <button class="cta-button" onclick="showPage('history')">
-        <span class="arrow">→</span> Explore Now
-      </button>
+<div id="container">
+
+  <!-- TOP BANNER -->
+  <div class="hazard">!!!!! !!!!! !!!!! CLASSIFIED INTELLIGENCE - DO NOT DISTRIBUTE !!!!! !!!!! !!!!!</div>
+  <hr class="bloodbar">
+  <p class="case-no">CASE FILE NO. 13.7-B // EYES ONLY // BEGUN 1998 // STATUS: OPEN</p>
+  <h1 class="title-main flicker">PAGES<br>OF THE<br>PAST</h1>
+  <p class="subtitle">A dark archive of the 18 most powerful figures in all of human history.</p>
+  <p class="subtitle" style="color:#8b0000;">Some were kings. Some were geniuses. Some were whole empires. All of them are gone now - but the records remain.</p>
+  <hr class="bloodbar">
+
+  <!-- SCROLLING MARQUEE -->
+  <marquee behavior="scroll" direction="left" scrollamount="6" bgcolor="#1a0000" height="28" style="color:#ff0000; font-weight:bold; border:3px inset #5a0000; text-shadow:0 0 6px #ff0000;">
+    *** BEWARE STRANGER!!! *** THE PAST IS NOT DEAD... IT IS ONLY SLEEPING!!! *** THIS ARCHIVE HOLDS THE MOST POWERFUL FIGURES IN ALL OF HISTORY!!! *** FORWARD THIS PAGE BEFORE IT IS DELETED!!! *** YOU ARE VISITOR NUMBER <span id="marqueeCount">00012345</span> AND THE DEAD ARE COUNTING YOU!!! ***
+  </marquee>
+
+  <!-- NAVIGATION -->
+  <table class="navtable" cellpadding="6">
+    <tr>
+      <td><a href="#" onclick="showPage('home')">[ HOME ]</a></td>
+      <td><a href="#" onclick="showPage('history')">[ HISTORY ]</a></td>
+      <td><a href="#" onclick="showPage('science')">[ SCIENCE ]</a></td>
+      <td><a href="#" onclick="showPage('philosophy')">[ PHILOSOPHY ]</a></td>
+      <td><a href="#" onclick="showPage('civilizations')">[ CIVILIZATIONS ]</a></td>
+    </tr>
+  </table>
+
+  <div class="hazard" style="margin-top:8px;">RITUAL IN PROGRESS... STAND CLEAR OF THE ARCHIVE</div>
+
+  <table class="retro-table" cellpadding="5" style="width:100%">
+    <tr>
+      <td style="width:50%">
+        <p style="color:#c9b37e; font-weight:bold;">Current Date: <span id="todayDate" style="color:#ffd700;">loading...</span></p>
+        <p style="color:#8b0000; font-weight:bold;">The dead have been archived since: <span class="blink" style="color:#ff0000;">MAY 1998</span></p>
+      </td>
+      <td style="width:50%">
+        <p style="color:#c9b37e; font-weight:bold;">You are visitor number:</p>
+        <span class="counter" id="hitCounter"></span>
+      </td>
+    </tr>
+  </table>
+
+  <!-- ============ THE ARCHIVE (HOME) ============ -->
+  <div id="home" class="page-content active">
+    <p class="section-label" style="margin-top:15px;">*** A WARNING TO ALL WHO ENTER ***</p>
+    <h2 class="section-title">They Are Listed Here For A Reason</h2>
+    <p class="herodesc">Deep inside this archive rest the files of conquerors, geniuses, philosophers, and empires whose deeds shook the world - and in some cases, awoke something that still lingers. Read each file carefully. Mark the threat level. And whatever you do... <span class="blink" style="color:#ff0000; font-weight:bold;">DO NOT READ THEM AFTER MIDNIGHT.</span></p>
+    <button style="font-size:18px;" onclick="showPage('history')">&gt;&gt; OPEN FILE 001 - ALEXANDER &lt;&lt;</button>
+
+    <div class="divider">☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠</div>
+
+    <!-- INDEX OF THE PAST -->
+    <div class="box">
+      <div class="box-title">*** THE INDEX - ALL 18 ENTRIES ***</div>
+      <table class="catalogue" cellpadding="4" cellspacing="0">
+        <tr>
+          <td class="fno">FILE 001</td><td class="name" onclick="showPage('history')">Alexander the Great</td><td class="cls">King of Macedonia</td><td class="lvl">☠☠☠☠☠</td>
+        </tr>
+        <tr>
+          <td class="fno">FILE 002</td><td class="name" onclick="showPage('history')">Cleopatra VII</td><td class="cls">Last Pharaoh of Ancient Egypt</td><td class="lvl">☠☠☠☠</td>
+        </tr>
+        <tr>
+          <td class="fno">FILE 003</td><td class="name" onclick="showPage('history')">Charlemagne</td><td class="cls">King of the Franks</td><td class="lvl">☠☠☠☠</td>
+        </tr>
+        <tr>
+          <td class="fno">FILE 004</td><td class="name" onclick="showPage('history')">Ashoka the Great</td><td class="cls">Emperor of the Maurya Dynasty</td><td class="lvl">☠☠</td>
+        </tr>
+        <tr>
+          <td class="fno">FILE 005</td><td class="name" onclick="showPage('science')">Isaac Newton</td><td class="cls">English Mathematician &amp; Physicist</td><td class="lvl">☠☠☠</td>
+        </tr>
+        <tr>
+          <td class="fno">FILE 006</td><td class="name" onclick="showPage('science')">Marie Curie</td><td class="cls">Physicist &amp; Chemist</td><td class="lvl">☠☠☠☠</td>
+        </tr>
+        <tr>
+          <td class="fno">FILE 007</td><td class="name" onclick="showPage('science')">Albert Einstein</td><td class="cls">Theoretical Physicist</td><td class="lvl">☠☠☠☠</td>
+        </tr>
+        <tr>
+          <td class="fno">FILE 008</td><td class="name" onclick="showPage('science')">Charles Darwin</td><td class="cls">English Naturalist</td><td class="lvl">☠☠☠☠</td>
+        </tr>
+        <tr>
+          <td class="fno">FILE 009</td><td class="name" onclick="showPage('philosophy')">Socrates</td><td class="cls">Founder of Western Philosophy</td><td class="lvl">☠☠☠</td>
+        </tr>
+        <tr>
+          <td class="fno">FILE 010</td><td class="name" onclick="showPage('philosophy')">Confucius</td><td class="cls">Chinese Philosopher</td><td class="lvl">☠☠☠</td>
+        </tr>
+        <tr>
+          <td class="fno">FILE 011</td><td class="name" onclick="showPage('philosophy')">Aristotle</td><td class="cls">Greek Philosopher &amp; Polymath</td><td class="lvl">☠☠☠</td>
+        </tr>
+        <tr>
+          <td class="fno">FILE 012</td><td class="name" onclick="showPage('philosophy')">Immanuel Kant</td><td class="cls">German Philosopher</td><td class="lvl">☠☠☠</td>
+        </tr>
+        <tr>
+          <td class="fno">FILE 013</td><td class="name" onclick="showPage('civilizations')">Ancient Egypt</td><td class="cls">Civilization of the Nile</td><td class="lvl">☠☠☠☠☠</td>
+        </tr>
+        <tr>
+          <td class="fno">FILE 014</td><td class="name" onclick="showPage('civilizations')">Mesopotamia</td><td class="cls">Cradle of Civilization</td><td class="lvl">☠☠☠☠</td>
+        </tr>
+        <tr>
+          <td class="fno">FILE 015</td><td class="name" onclick="showPage('civilizations')">Ancient Greece</td><td class="cls">Birthplace of Democracy</td><td class="lvl">☠☠☠☠</td>
+        </tr>
+        <tr>
+          <td class="fno">FILE 016</td><td class="name" onclick="showPage('civilizations')">Roman Empire</td><td class="cls">The Roman Empire</td><td class="lvl">☠☠☠☠☠</td>
+        </tr>
+        <tr>
+          <td class="fno">FILE 017</td><td class="name" onclick="showPage('civilizations')">Indus Valley</td><td class="cls">Bronze Age Civilization</td><td class="lvl">☠☠☠</td>
+        </tr>
+        <tr>
+          <td class="fno">FILE 018</td><td class="name" onclick="showPage('civilizations')">Maya Civilization</td><td class="cls">Mesoamerican Civilization</td><td class="lvl">☠☠☠☠☠</td>
+        </tr>
+      </table>
     </div>
-    <div class="hero-visual">
-      <div class="circle-large"></div>
-      <div class="circle-small"></div>
+
+    <div class="divider">☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠</div>
+
+    <!-- NEW ARRIVALS -->
+    <div class="box">
+      <div class="box-title">*** NEW ARRIVALS FROM THE CRYPT ***</div>
+      <table class="whatsnew" cellpadding="6" cellspacing="2" style="width:100%; margin-top:8px;">
+        <tr>
+          <td><span class="new">[UNEARTHED!!!]</span> <span class="date">08/15/2026</span> - <span class="item">Two new files added: Ashoka the Great &amp; the Maya Civilization. Neither should have been found.</span></td>
+        </tr>
+        <tr>
+          <td><span class="new">[UNEARTHED!!!]</span> <span class="date">07/02/2026</span> - <span class="item">The Book of the Dead is now accepting signatures. The dead are patient. You are not.</span></td>
+        </tr>
+        <tr>
+          <td><span class="new">[UNEARTHED!!!]</span> <span class="date">06/10/2026</span> - <span class="item">Archive wards reinforced. Threat levels re-calibrated. One file was reclassified. We do not speak of it.</span></td>
+        </tr>
+      </table>
     </div>
-    <div class="progress-bar">
-      <span class="progress-number">01</span>
-      <div class="progress-line"></div>
-      <span class="progress-number">04</span>
+
+    <div class="divider">☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠</div>
+
+    <!-- ARCHIVE SECTIONS -->
+    <h2 class="section-title">Browse The Archive</h2>
+    <table class="cat-table" cellpadding="8" cellspacing="8">
+      <tr>
+        <td onclick="showPage('history')">
+          <div class="cat-symbol">☠</div>
+          <h3>HISTORY</h3>
+          <p>Kings, queens &amp; conquerors who shaped the world - for better and for worse.</p>
+        </td>
+        <td onclick="showPage('science')">
+          <div class="cat-symbol">⚗</div>
+          <h3>SCIENCE</h3>
+          <p>Brilliant minds who unravelled the secrets of nature.</p>
+        </td>
+      </tr>
+      <tr>
+        <td onclick="showPage('philosophy')">
+          <div class="cat-symbol">☝</div>
+          <h3>PHILOSOPHY</h3>
+          <p>The deep thinkers who asked life's biggest questions.</p>
+        </td>
+        <td onclick="showPage('civilizations')">
+          <div class="cat-symbol">✝</div>
+          <h3>CIVILIZATIONS</h3>
+          <p>Ancient worlds that built the foundations of everything.</p>
+        </td>
+      </tr>
+    </table>
+
+    <div class="divider">☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠</div>
+
+    <!-- BOOK OF THE DEAD -->
+    <div class="box">
+      <div class="box-title">*** SIGN THE BOOK OF THE DEAD ***</div>
+      <p style="color:#c9b37e; font-size:13px;">Leave a message for the archived. They read every word. We have seen it.</p>
+      <table cellpadding="4" style="margin: 6px auto; text-align:left;">
+        <tr><td style="color:#ff6347;">Your name:</td><td><input type="text" id="gbName" size="25"></td></tr>
+        <tr><td style="color:#ff6347;">Your e-mail:</td><td><input type="text" id="gbEmail" size="25"></td></tr>
+        <tr><td style="color:#ff6347; vertical-align:top;">Message for the dead:</td><td><textarea id="gbMsg" rows="3" cols="27"></textarea></td></tr>
+      </table>
+      <button onclick="signGuestbook()">&gt;&gt; IMPRINT YOUR SOUL &lt;&lt;</button>
+      <div id="guestbookEntries" style="margin-top:10px;"></div>
     </div>
   </div>
-  <div class="content-section">
-    <div class="category-grid">
-      <div class="category-card" onclick="showPage('history')">
-        <div class="category-icon">👑</div>
-        <h3>History</h3>
-        <p>Explore the lives of kings, queens, and rulers who changed the course of history and shaped the destiny of nations.</p>
-      </div>
-      <div class="category-card" onclick="showPage('science')">
-        <div class="category-icon">🔬</div>
-        <h3>Science</h3>
-        <p>Meet the brilliant minds whose groundbreaking discoveries revolutionized our understanding of the universe.</p>
-      </div>
-      <div class="category-card" onclick="showPage('philosophy')">
-        <div class="category-icon">💭</div>
-        <h3>Philosophy</h3>
-        <p>Delve into the profound wisdom of philosophers who pondered life's deepest questions and meaning.</p>
-      </div>
-      <div class="category-card" onclick="showPage('civilizations')">
-        <div class="category-icon">🏛️</div>
-        <h3>Civilizations</h3>
-        <p>Uncover the ancient societies that laid the foundations of modern culture and human progress.</p>
-      </div>
+
+  <!-- ============ HISTORY ============ -->
+  <div id="history" class="page-content">
+    <div class="hazard">!!!!! SECTION I - HISTORY !!!!!</div>
+    <p class="section-label">DISCOVER THE PAST</p>
+    <h2 class="section-title">History</h2>
+    <p class="herodesc">They wore crowns and carried sceptres. They also carried armies. Approach these files with respect - their kind is not gone, only sleeping.</p>
+
+    <div class="file">
+      <div class="file-head"><span class="fno">FILE NO. 001</span> // ALEXANDER THE GREAT</div>
+      <img src="https://smarthistory.org/wp-content/uploads/2024/08/munich-alexander.jpg" alt="Alexander the Great">
+      <div class="file-row"><span class="file-label">CLASSIFICATION:</span> King of Macedonia</div>
+      <div class="file-row"><span class="file-label">THREAT LEVEL:</span> <span class="threat">☠☠☠☠☠</span></div>
+      <div class="file-row"><span class="file-label">STATUS:</span> <span class="file-status dead">DECEASED - 323 BCE</span> &nbsp; <span class="file-label">LOCATION OF REMAINS:</span> Macedonia (disputed)</div>
+      <div class="file-row"><span class="file-label">FILE:</span> King of Macedonia who conquered one of the largest empires in history, stretching from Greece to India. His military genius was legendary - and so was his ambition. When he wept, it was because there were no more worlds to take.</div>
+    </div>
+
+    <div class="file">
+      <div class="file-head"><span class="fno">FILE NO. 002</span> // CLEOPATRA VII</div>
+      <img src="https://www.worldhistory.org/img/c/p/1200x900/318.jpg" alt="Cleopatra VII">
+      <div class="file-row"><span class="file-label">CLASSIFICATION:</span> Last Pharaoh of Ancient Egypt</div>
+      <div class="file-row"><span class="file-label">THREAT LEVEL:</span> <span class="threat">☠☠☠☠</span></div>
+      <div class="file-row"><span class="file-label">STATUS:</span> <span class="file-status dead">DECEASED - 30 BCE</span> &nbsp; <span class="file-label">LOCATION OF REMAINS:</span> Unknown (the tomb has never been found)</div>
+      <div class="file-row"><span class="file-label">FILE:</span> The last pharaoh of Ancient Egypt, and a mind sharper than any blade. She charmed Julius Caesar and Mark Antony, and bent Mediterranean politics to her will. Her end is disputed. The asp knows the truth.</div>
+    </div>
+
+    <div class="file">
+      <div class="file-head"><span class="fno">FILE NO. 003</span> // CHARLEMAGNE</div>
+      <img src="https://serious-science.org/img/2016/08/karl-3.jpg" alt="Charlemagne">
+      <div class="file-row"><span class="file-label">CLASSIFICATION:</span> King of the Franks</div>
+      <div class="file-row"><span class="file-label">THREAT LEVEL:</span> <span class="threat">☠☠☠☠</span></div>
+      <div class="file-row"><span class="file-label">STATUS:</span> <span class="file-status dead">DECEASED - 814 CE</span> &nbsp; <span class="file-label">LOCATION OF REMAINS:</span> Aachen Cathedral</div>
+      <div class="file-row"><span class="file-label">FILE:</span> King of the Franks who united most of Western Europe during the Middle Ages. Crowned Emperor of the Romans in 800 CE. They say he founded an empire. They do not mention what he did to those who refused.</div>
+    </div>
+
+    <div class="file">
+      <div class="file-head"><span class="fno">FILE NO. 004</span> // ASHOKA THE GREAT</div>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Ashoka_pillar_at_Vaishali%2C_Bihar%2C_India.jpg/500px-Ashoka_pillar_at_Vaishali%2C_Bihar%2C_India.jpg" alt="Ashoka the Great">
+      <div class="file-row"><span class="file-label">CLASSIFICATION:</span> Emperor of the Maurya Dynasty</div>
+      <div class="file-row"><span class="file-label">THREAT LEVEL:</span> <span class="threat low">☠☠</span> <span style="color:#ffd700;">(formerly ☠☠☠☠☠)</span></div>
+      <div class="file-row"><span class="file-label">STATUS:</span> <span class="file-status dead">DECEASED - 232 BCE</span> &nbsp; <span class="file-label">LOCATION OF REMAINS:</span> Unknown</div>
+      <div class="file-row"><span class="file-label">FILE:</span> Emperor of the Maurya Dynasty who witnessed the horrors of war and - remarkably - chose to change. He embraced Buddhism and spread peace, non-violence, and tolerance across his empire. One of the few files marked <span class="file-status">"REDEEMED"</span>.</div>
     </div>
   </div>
+
+  <!-- ============ SCIENCE ============ -->
+  <div id="science" class="page-content">
+    <div class="hazard">!!!!! SECTION II - SCIENCE !!!!!</div>
+    <p class="section-label">PIONEERS OF KNOWLEDGE</p>
+    <h2 class="section-title">Science</h2>
+    <p class="herodesc">They pulled back the curtain on the universe and stared into things that were not meant to be seen. Their discoveries changed everything. Whether that was a good thing remains an open question.</p>
+
+    <div class="file">
+      <div class="file-head"><span class="fno">FILE NO. 005</span> // ISAAC NEWTON</div>
+      <img src="https://cdn.britannica.com/56/59856-050-AAA3AA05/Godfrey-Kneller-Isaaac-Newton-oil-painting-National-1702.jpg?w=400&h=225&c=crop" alt="Isaac Newton">
+      <div class="file-row"><span class="file-label">CLASSIFICATION:</span> English Mathematician &amp; Physicist</div>
+      <div class="file-row"><span class="file-label">THREAT LEVEL:</span> <span class="threat">☠☠☠</span></div>
+      <div class="file-row"><span class="file-label">STATUS:</span> <span class="file-status dead">DECEASED - 1727</span> &nbsp; <span class="file-label">LOCATION OF REMAINS:</span> Westminster Abbey</div>
+      <div class="file-row"><span class="file-label">FILE:</span> English mathematician and physicist who formulated the laws of motion and universal gravitation. He wrote more about alchemy than physics. His papers, when finally opened, caused men to whisper.</div>
+    </div>
+
+    <div class="file">
+      <div class="file-head"><span class="fno">FILE NO. 006</span> // MARIE CURIE</div>
+      <img src="https://media.franceintheus.org/wp-content/uploads/2000/01/marie_curie.jpg" alt="Marie Curie">
+      <div class="file-row"><span class="file-label">CLASSIFICATION:</span> Physicist &amp; Chemist</div>
+      <div class="file-row"><span class="file-label">THREAT LEVEL:</span> <span class="threat">☠☠☠☠</span></div>
+      <div class="file-row"><span class="file-label">STATUS:</span> <span class="file-status dead">DECEASED - 1934</span> &nbsp; <span class="file-label">LOCATION OF REMAINS:</span> The Pantheon (her notebook is still radioactive)</div>
+      <div class="file-row"><span class="file-label">FILE:</span> Pioneer of radioactivity. First woman to win a Nobel Prize, and the only person to win Nobel Prizes in two different sciences. She carried glowing vials in her pockets. The glow followed her to the grave.</div>
+    </div>
+
+    <div class="file">
+      <div class="file-head"><span class="fno">FILE NO. 007</span> // ALBERT EINSTEIN</div>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Portrait_of_Albert_Einstein_and_Others_%281879-1955%29%2C_Physicist_-_Restoration1.jpg" alt="Albert Einstein">
+      <div class="file-row"><span class="file-label">CLASSIFICATION:</span> Theoretical Physicist</div>
+      <div class="file-row"><span class="file-label">THREAT LEVEL:</span> <span class="threat">☠☠☠☠</span></div>
+      <div class="file-row"><span class="file-label">STATUS:</span> <span class="file-status dead">DECEASED - 1955</span> &nbsp; <span class="file-label">LOCATION OF REMAINS:</span> His brain is preserved. It was examined. It was different.</div>
+      <div class="file-row"><span class="file-label">FILE:</span> Developed the theory of relativity - one of the two pillars of modern physics. His equation E=mc&sup2; revealed that mass and energy are one. The equation was elegant. What it made possible was not.</div>
+    </div>
+
+    <div class="file">
+      <div class="file-head"><span class="fno">FILE NO. 008</span> // CHARLES DARWIN</div>
+      <img src="https://www.thoughtco.com/thmb/g50VHaxCTluNkag1rq1pCJ1cDRU=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Charles-Darwin-3000-3x2gty-58b9982e5f9b58af5c6a277f.jpg" alt="Charles Darwin">
+      <div class="file-row"><span class="file-label">CLASSIFICATION:</span> English Naturalist</div>
+      <div class="file-row"><span class="file-label">THREAT LEVEL:</span> <span class="threat">☠☠☠☠</span></div>
+      <div class="file-row"><span class="file-label">STATUS:</span> <span class="file-status dead">DECEASED - 1882</span> &nbsp; <span class="file-label">LOCATION OF REMAINS:</span> Westminster Abbey</div>
+      <div class="file-row"><span class="file-label">FILE:</span> English naturalist who established the theory of evolution by natural selection. He showed that all life is one long chain stretching back into the dark. Many were not ready for the answer he found in the bones.</div>
+    </div>
+  </div>
+
+  <!-- ============ PHILOSOPHY ============ -->
+  <div id="philosophy" class="page-content">
+    <div class="hazard">!!!!! SECTION III - PHILOSOPHY !!!!!</div>
+    <p class="section-label">SEEKERS OF WISDOM</p>
+    <h2 class="section-title">Philosophy</h2>
+    <p class="herodesc">They asked the questions no one else dared: What is real? What is good? What is the point? Their words outlived them. Words, it turns out, are the most dangerous things of all.</p>
+
+    <div class="file">
+      <div class="file-head"><span class="fno">FILE NO. 009</span> // SOCRATES</div>
+      <img src="https://d1nn9x4fgzyvn4.cloudfront.net/styles/scaled_780_wide/s3/2021-08/SC192857_4x3.jpg?itok=DaGqjfJu" alt="Socrates">
+      <div class="file-row"><span class="file-label">CLASSIFICATION:</span> Founder of Western Philosophy</div>
+      <div class="file-row"><span class="file-label">THREAT LEVEL:</span> <span class="threat">☠☠☠</span></div>
+      <div class="file-row"><span class="file-label">STATUS:</span> <span class="file-status dead">DECEASED - 399 BCE</span> &nbsp; <span class="file-label">LOCATION OF REMAINS:</span> Athens (method of death: poison hemlock, by court order)</div>
+      <div class="file-row"><span class="file-label">FILE:</span> Founder of Western philosophy. His method was to ask questions until people realised they knew nothing. The city decided this was too dangerous and ordered him to drink hemlock. He asked if they were sure. They were.</div>
+    </div>
+
+    <div class="file">
+      <div class="file-head"><span class="fno">FILE NO. 010</span> // CONFUCIUS</div>
+      <img src="https://www.worldhistory.org/img/c/p/1200x900/969.jpg" alt="Confucius">
+      <div class="file-row"><span class="file-label">CLASSIFICATION:</span> Chinese Philosopher</div>
+      <div class="file-row"><span class="file-label">THREAT LEVEL:</span> <span class="threat">☠☠☠</span></div>
+      <div class="file-row"><span class="file-label">STATUS:</span> <span class="file-status dead">DECEASED - 479 BCE</span> &nbsp; <span class="file-label">LOCATION OF REMAINS:</span> Kong Forest, Qufu</div>
+      <div class="file-row"><span class="file-label">FILE:</span> Chinese philosopher whose teachings on morality, social relationships, justice, and sincerity became Confucianism. His words shaped East Asian culture for millennia. He did not start a war. His ideas simply won without one.</div>
+    </div>
+
+    <div class="file">
+      <div class="file-head"><span class="fno">FILE NO. 011</span> // ARISTOTLE</div>
+      <img src="https://i.etsystatic.com/37692861/r/il/e654bc/4593992631/il_fullxfull.4593992631_cwpy.jpg" alt="Aristotle">
+      <div class="file-row"><span class="file-label">CLASSIFICATION:</span> Greek Philosopher &amp; Polymath</div>
+      <div class="file-row"><span class="file-label">THREAT LEVEL:</span> <span class="threat">☠☠☠</span></div>
+      <div class="file-row"><span class="file-label">STATUS:</span> <span class="file-status dead">DECEASED - 322 BCE</span> &nbsp; <span class="file-label">LOCATION OF REMAINS:</span> Chalcis, Greece</div>
+      <div class="file-row"><span class="file-label">FILE:</span> Greek polymath who wrote on physics, biology, logic, ethics, politics, and everything else he could find. He tutored Alexander the Great - the most dangerous man alive. They made a dangerous pair.</div>
+    </div>
+
+    <div class="file">
+      <div class="file-head"><span class="fno">FILE NO. 012</span> // IMMANUEL KANT</div>
+      <img src="http://www.versobooks.com/cdn/shop/articles/immanuel-kant-3e8cdb504e54db4797e7c5f5e46f0d0d.jpg?v=1677640244" alt="Immanuel Kant">
+      <div class="file-row"><span class="file-label">CLASSIFICATION:</span> German Philosopher</div>
+      <div class="file-row"><span class="file-label">THREAT LEVEL:</span> <span class="threat">☠☠☠</span></div>
+      <div class="file-row"><span class="file-label">STATUS:</span> <span class="file-status dead">DECEASED - 1804</span> &nbsp; <span class="file-label">LOCATION OF REMAINS:</span> K&ouml;nigsberg (he never once left the city in his life)</div>
+      <div class="file-row"><span class="file-label">FILE:</span> German philosopher who argued that reason is the source of morality. His "Critique of Pure Reason" sought to unite reason with experience. The city knew him as the man who took a walk at exactly 5:00 PM, every day, for fifty years.</div>
+    </div>
+  </div>
+
+  <!-- ============ CIVILIZATIONS ============ -->
+  <div id="civilizations" class="page-content">
+    <div class="hazard">!!!!! SECTION IV - CIVILIZATIONS !!!!!</div>
+    <p class="section-label">ANCIENT WORLDS</p>
+    <h2 class="section-title">Civilizations</h2>
+    <p class="herodesc">Empires that built wonders, wrote laws, and reached for the sky - and then were swallowed by time. Walk through their ruins carefully. The stones remember.</p>
+
+    <div class="file">
+      <div class="file-head"><span class="fno">FILE NO. 013</span> // ANCIENT EGYPT</div>
+      <img src="https://cdn.britannica.com/26/171026-050-11CE446C/Great-Sphinx-of-Giza-pyramid-background-Khafre.jpg" alt="Ancient Egypt">
+      <div class="file-row"><span class="file-label">CLASSIFICATION:</span> Civilization of the Nile</div>
+      <div class="file-row"><span class="file-label">THREAT LEVEL:</span> <span class="threat">☠☠☠☠☠</span></div>
+      <div class="file-row"><span class="file-label">STATUS:</span> <span class="file-status dead">EXTINCT - c. 30 BCE</span> &nbsp; <span class="file-label">REMAINS:</span> The Pyramids of Giza</div>
+      <div class="file-row"><span class="file-label">FILE:</span> One of the world's oldest civilizations, known for its pyramids, pharaohs, hieroglyphics, and advances in architecture, mathematics, and medicine along the Nile. The tombs were sealed with curses. The curses, apparently, were real.</div>
+    </div>
+
+    <div class="file">
+      <div class="file-head"><span class="fno">FILE NO. 014</span> // MESOPOTAMIA</div>
+      <img src="https://cdn.britannica.com/08/150008-050-D5A45539/Ziggurat-Ur.jpg" alt="Mesopotamia">
+      <div class="file-row"><span class="file-label">CLASSIFICATION:</span> Cradle of Civilization</div>
+      <div class="file-row"><span class="file-label">THREAT LEVEL:</span> <span class="threat">☠☠☠☠</span></div>
+      <div class="file-row"><span class="file-label">STATUS:</span> <span class="file-status dead">EXTINCT - c. 539 BCE</span> &nbsp; <span class="file-label">REMAINS:</span> The Ziggurats of Ur</div>
+      <div class="file-row"><span class="file-label">FILE:</span> The "Cradle of Civilization" between the Tigris and Euphrates rivers. The Sumerians invented writing (cuneiform), the wheel, and irrigation, and built the first cities. They wrote the oldest stories. Some of those stories should not have been written down.</div>
+    </div>
+
+    <div class="file">
+      <div class="file-head"><span class="fno">FILE NO. 015</span> // ANCIENT GREECE</div>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/d/da/The_Parthenon_in_Athens.jpg" alt="Ancient Greece">
+      <div class="file-row"><span class="file-label">CLASSIFICATION:</span> Birthplace of Democracy</div>
+      <div class="file-row"><span class="file-label">THREAT LEVEL:</span> <span class="threat">☠☠☠☠</span></div>
+      <div class="file-row"><span class="file-label">STATUS:</span> <span class="file-status dead">EXTINCT - c. 146 BCE</span> &nbsp; <span class="file-label">REMAINS:</span> The Parthenon</div>
+      <div class="file-row"><span class="file-label">FILE:</span> Birthplace of Western philosophy, democracy, theater, and the Olympic Games. Their art and architecture were so good that every civilization since has been copying them. Their gods were jealous, petty, and very good at curses.</div>
+    </div>
+
+    <div class="file">
+      <div class="file-head"><span class="fno">FILE NO. 016</span> // ROMAN EMPIRE</div>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/1200px-Colosseo_2020.jpg" alt="Roman Empire">
+      <div class="file-row"><span class="file-label">CLASSIFICATION:</span> The Roman Empire</div>
+      <div class="file-row"><span class="file-label">THREAT LEVEL:</span> <span class="threat">☠☠☠☠☠</span></div>
+      <div class="file-row"><span class="file-label">STATUS:</span> <span class="file-status dead">EXTINCT - 476 CE</span> &nbsp; <span class="file-label">REMAINS:</span> The Colosseum (and 50,000 miles of roads)</div>
+      <div class="file-row"><span class="file-label">FILE:</span> One of history's greatest empires, famed for aqueducts, roads, and the Colosseum. Roman law and Latin shaped the Western world. They built roads that still exist. Their empire fell, but their roads - and their ideas - refused to die.</div>
+    </div>
+
+    <div class="file">
+      <div class="file-head"><span class="fno">FILE NO. 017</span> // INDUS VALLEY</div>
+      <img src="https://i.natgeofe.com/n/c20d01e3-b521-4447-a4cc-e736ebde6439/24712.jpg" alt="Indus Valley">
+      <div class="file-row"><span class="file-label">CLASSIFICATION:</span> Bronze Age Civilization</div>
+      <div class="file-row"><span class="file-label">THREAT LEVEL:</span> <span class="threat">☠☠☠</span></div>
+      <div class="file-row"><span class="file-label">STATUS:</span> <span class="file-status dead">EXTINCT - c. 1300 BCE</span> &nbsp; <span class="file-label">REMAINS:</span> Mohenjo-daro &amp; Harappa</div>
+      <div class="file-row"><span class="file-label">FILE:</span> An advanced Bronze Age civilization with sophisticated city planning, advanced drainage, and standardized weights and measures. They built cities so well planned that we are still figuring them out. Then they vanished - and left no translation of their writing behind.</div>
+    </div>
+
+    <div class="file">
+      <div class="file-head"><span class="fno">FILE NO. 018</span> // MAYA CIVILIZATION</div>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Chichen_Itza_3.jpg" alt="Maya Civilization">
+      <div class="file-row"><span class="file-label">CLASSIFICATION:</span> Mesoamerican Civilization</div>
+      <div class="file-row"><span class="file-label">THREAT LEVEL:</span> <span class="threat">☠☠☠☠☠</span></div>
+      <div class="file-row"><span class="file-label">STATUS:</span> <span class="file-status dead">EXTINCT - c. 1500 CE</span> &nbsp; <span class="file-label">REMAINS:</span> Chichen Itza</div>
+      <div class="file-row"><span class="file-label">FILE:</span> Mesoamerican civilization known for its hieroglyphic script, art, advanced mathematics, and precision calendars - accurate to the day, thousands of years into the future. They predicted the end of their world. It came. They were right.</div>
+    </div>
+  </div>
+
+  <hr class="bloodbar">
+
+  <!-- WEBRING -->
+  <div class="webring">
+    <span class="webring-title">*** THE WEB OF THE DAMNED - HISTORY WEBRING ***</span><br>
+    <span style="font-size:12px;">Join 666 other haunted history homepages. There is no leaving.</span><br>
+    <a href="#" onclick="ringClick()">&lt;&lt; PREV APP</a> |
+    <a href="#" onclick="ringClick()">RANDOM GRAVE</a> |
+    <a href="#" onclick="ringClick()">NEXT SPIRIT &gt;&gt;</a>
+  </div>
+
+  <!-- BADGES -->
+  <div>
+    <div class="badge">BEST VIEWED<br>IN THE <span style="color:#ff0000;">DARK</span><br>AT 800x600</div>
+    <div class="badge blood">SURVIVOR OF<br><span class="blink">666</span> VISITS</div>
+    <div class="badge">THIS SITE<br>IS <span style="color:#ff0000;">HAUNTED</span><br>ENTER AT OWN RISK</div>
+    <div class="badge">DO NOT READ<br>AFTER <span style="color:#ff0000;">MIDNIGHT</span></div>
+  </div>
+
+  <div class="hazard" style="margin-top:8px;">!!!!! THANKS FOR VISITING THE ARCHIVE - COME BACK SOON (IF YOU DARE) !!!!!</div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <hr class="bloodbar">
+    <p class="stars">☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠ ☠</p>
+    <p><span class="blink" style="color:#ff0000;">&lt;!-- SUMMONED BY KASHIF SAYYAD --&gt;</span></p>
+    <p>This archive was last updated on <span style="color:#ffd700;">August 15, 2026</span></p>
+    <p>&copy; 1998-2026 Pages of the Past. History preserved, in the dark.</p>
+    <p style="color:#c9b37e;">"The past is not dead. It is not even past." - William Faulkner</p>
+    <p class="backtotop"><a href="#container">Return 2 The Top Of The Crypt ^</a></p>
+    <p style="color:#5a0000; font-size:10px; margin-top:8px;">[ Warning: any resemblance to real historical figures is entirely their own fault ]</p>
+  </div>
+
 </div>
-
-<!-- History Page -->
-<div id="history" class="page-content">
-  <div class="content-section">
-    <div class="section-header">
-      <div class="section-label">DISCOVER THE PAST</div>
-      <h2 class="section-title">Kings & Rulers</h2>
-      <p class="section-description">Journey through the annals of history to meet the monarchs and leaders who shaped empires, forged nations, and left an indelible mark on human civilization.</p>
-    </div>
-    <div class="cards-grid">
-      <div class="card">
-        <img src="https://smarthistory.org/wp-content/uploads/2024/08/munich-alexander.jpg" alt="Alexander the Great" class="card-img">
-        <div class="card-number">01</div>
-        <h3>Alexander the Great</h3>
-        <p>King of Macedonia who created one of the largest empires in ancient history, stretching from Greece to India. His military genius and strategic brilliance remain legendary throughout the ages.</p>
-        <div class="date">356 - 323 BCE</div>
-      </div>
-      <div class="card">
-        <img src="https://www.worldhistory.org/img/c/p/1200x900/318.jpg" alt="Cleopatra VII" class="card-img">
-        <div class="card-number">02</div>
-        <h3>Cleopatra VII</h3>
-        <p>The last active pharaoh of Ancient Egypt, known for her intelligence, political acumen, and relationships with Julius Caesar and Mark Antony that shaped Mediterranean politics.</p>
-        <div class="date">69 - 30 BCE</div>
-      </div>
-      <div class="card">
-        <img src="https://serious-science.org/img/2016/08/karl-3.jpg" alt="Charlemagne" class="card-img">
-        <div class="card-number">03</div>
-        <h3>Charlemagne</h3>
-        <p>King of the Franks who united much of Western Europe during the Middle Ages and was crowned Emperor of the Romans in 800 CE, establishing the foundation of modern Europe.</p>
-        <div class="date">742 - 814 CE</div>
-      </div>
-      <div class="card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Ashoka_pillar_at_Vaishali%2C_Bihar%2C_India.jpg/500px-Ashoka_pillar_at_Vaishali%2C_Bihar%2C_India.jpg" alt="Ashoka the Great" class="card-img">
-        <div class="card-number">04</div>
-        <h3>Ashoka the Great</h3>
-        <p>Indian emperor of the Maurya Dynasty who, after witnessing the horrors of war, embraced Buddhism and promoted peace, non-violence, and tolerance throughout his vast empire.</p>
-        <div class="date">304 - 232 BCE</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Science Page -->
-<div id="science" class="page-content">
-  <div class="content-section">
-    <div class="section-header">
-      <div class="section-label">PIONEERS OF KNOWLEDGE</div>
-      <h2 class="section-title">Great Scientists</h2>
-      <p class="section-description">Meet the visionary minds whose groundbreaking discoveries illuminated the mysteries of our universe and transformed our understanding of nature, reality, and existence itself.</p>
-    </div>
-    <div class="cards-grid">
-      <div class="card">
-        <img src="https://cdn.britannica.com/56/59856-050-AAA3AA05/Godfrey-Kneller-Isaaac-Newton-oil-painting-National-1702.jpg?w=400&h=225&c=crop" alt="Isaac Newton" class="card-img">
-        <div class="card-number">01</div>
-        <h3>Isaac Newton</h3>
-        <p>English mathematician and physicist who formulated the laws of motion and universal gravitation, laying the groundwork for classical mechanics and revolutionizing scientific thought.</p>
-        <div class="date">1643 - 1727</div>
-      </div>
-      <div class="card">
-        <img src="https://media.franceintheus.org/wp-content/uploads/2000/01/marie_curie.jpg" alt="Marie Curie" class="card-img">
-        <div class="card-number">02</div>
-        <h3>Marie Curie</h3>
-        <p>Pioneering physicist and chemist who conducted groundbreaking research on radioactivity. First woman to win a Nobel Prize and the only person to win Nobel Prizes in two different sciences.</p>
-        <div class="date">1867 - 1934</div>
-      </div>
-      <div class="card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Portrait_of_Albert_Einstein_and_Others_%281879-1955%29%2C_Physicist_-_Restoration1.jpg" alt="Albert Einstein" class="card-img">
-        <div class="card-number">03</div>
-        <h3>Albert Einstein</h3>
-        <p>Theoretical physicist who developed the theory of relativity, one of the two pillars of modern physics. His equation E=mc² revolutionized our understanding of energy, mass, and space-time.</p>
-        <div class="date">1879 - 1955</div>
-      </div>
-      <div class="card">
-        <img src="https://www.thoughtco.com/thmb/g50VHaxCTluNkag1rq1pCJ1cDRU=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Charles-Darwin-3000-3x2gty-58b9982e5f9b58af5c6a277f.jpg" alt="Charles Darwin" class="card-img">
-        <div class="card-number">04</div>
-        <h3>Charles Darwin</h3>
-        <p>English naturalist who established the theory of evolution through natural selection, fundamentally changing our understanding of life on Earth and humanity's place in nature.</p>
-        <div class="date">1809 - 1882</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Philosophy Page -->
-<div id="philosophy" class="page-content">
-  <div class="content-section">
-    <div class="section-header">
-      <div class="section-label">SEEKERS OF WISDOM</div>
-      <h2 class="section-title">Great Philosophers</h2>
-      <p class="section-description">Explore the profound thoughts of philosophical giants who questioned the nature of existence, meaning, morality, and truth, shaping the intellectual foundations of human civilization.</p>
-    </div>
-    <div class="cards-grid">
-      <div class="card">
-        <img src="https://d1nn9x4fgzyvn4.cloudfront.net/styles/scaled_780_wide/s3/2021-08/SC192857_4x3.jpg?itok=DaGqjfJu" alt="Socrates" class="card-img">
-        <div class="card-number">01</div>
-        <h3>Socrates</h3>
-        <p>Ancient Greek philosopher credited as the founder of Western philosophy. Famous for the Socratic method of questioning and his profound assertion that "the unexamined life is not worth living."</p>
-        <div class="date">470 - 399 BCE</div>
-      </div>
-      <div class="card">
-        <img src="https://www.worldhistory.org/img/c/p/1200x900/969.jpg" alt="Confucius" class="card-img">
-        <div class="card-number">02</div>
-        <h3>Confucius</h3>
-        <p>Chinese philosopher whose teachings on morality, social relationships, justice, and sincerity formed the basis of Confucianism, profoundly influencing East Asian culture for millennia.</p>
-        <div class="date">551 - 479 BCE</div>
-      </div>
-      <div class="card">
-        <img src="https://i.etsystatic.com/37692861/r/il/e654bc/4593992631/il_fullxfull.4593992631_cwpy.jpg" alt="Aristotle" class="card-img">
-        <div class="card-number">03</div>
-        <h3>Aristotle</h3>
-        <p>Greek philosopher and polymath whose writings covered physics, biology, zoology, metaphysics, logic, ethics, aesthetics, poetry, and politics. His work shaped Western intellectual tradition.</p>
-        <div class="date">384 - 322 BCE</div>
-      </div>
-      <div class="card">
-        <img src="http://www.versobooks.com/cdn/shop/articles/immanuel-kant-3e8cdb504e54db4797e7c5f5e46f0d0d.jpg?v=1677640244" alt="Immanuel Kant" class="card-img">
-        <div class="card-number">04</div>
-        <h3>Immanuel Kant</h3>
-        <p>German philosopher who argued that reason is the source of morality. His Critique of Pure Reason sought to unite reason with experience to transcend the failures of traditional philosophy.</p>
-        <div class="date">1724 - 1804</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Civilizations Page -->
-<div id="civilizations" class="page-content">
-  <div class="content-section">
-    <div class="section-header">
-      <div class="section-label">ANCIENT WORLDS</div>
-      <h2 class="section-title">Lost Civilizations</h2>
-      <p class="section-description">Journey to the ancient worlds that built the foundations of human civilization, creating architectural marvels, sophisticated societies, and cultural legacies that endure to this day.</p>
-    </div>
-    <div class="cards-grid">
-      <div class="card">
-        <img src="https://cdn.britannica.com/26/171026-050-11CE446C/Great-Sphinx-of-Giza-pyramid-background-Khafre.jpg" alt="Ancient Egypt" class="card-img">
-        <div class="card-number">01</div>
-        <h3>Ancient Egypt</h3>
-        <p>One of the world's oldest civilizations, known for magnificent pyramids, powerful pharaohs, intricate hieroglyphics, and remarkable advances in architecture, mathematics, and medicine along the Nile.</p>
-        <div class="date">c. 3100 - 30 BCE</div>
-      </div>
-      <div class="card">
-        <img src="https://cdn.britannica.com/08/150008-050-D5A45539/Ziggurat-Ur.jpg" alt="Mesopotamia" class="card-img">
-        <div class="card-number">02</div>
-        <h3>Mesopotamia</h3>
-        <p>The "Cradle of Civilization" between the Tigris and Euphrates rivers. Home to the Sumerians who invented writing (cuneiform), the wheel, irrigation systems, and established the first cities.</p>
-        <div class="date">c. 3500 - 539 BCE</div>
-      </div>
-      <div class="card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/d/da/The_Parthenon_in_Athens.jpg" alt="Ancient Greece" class="card-img">
-        <div class="card-number">03</div>
-        <h3>Ancient Greece</h3>
-        <p>Birthplace of Western philosophy, democracy, theater, and the Olympic Games. Greek culture profoundly influenced Western civilization through revolutionary art, architecture, and thought.</p>
-        <div class="date">c. 800 - 146 BCE</div>
-      </div>
-      <div class="card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/1200px-Colosseo_2020.jpg" alt="Roman Empire" class="card-img">
-        <div class="card-number">04</div>
-        <h3>Roman Empire</h3>
-        <p>One of history's greatest empires, renowned for engineering marvels like aqueducts, roads, and the Colosseum. Roman law, governance, and Latin language shaped Western civilization.</p>
-        <div class="date">27 BCE - 476 CE</div>
-      </div>
-      <div class="card">
-        <img src="https://i.natgeofe.com/n/c20d01e3-b521-4447-a4cc-e736ebde6439/24712.jpg" alt="Indus Valley" class="card-img">
-        <div class="card-number">05</div>
-        <h3>Indus Valley</h3>
-        <p>Advanced Bronze Age civilization known for sophisticated urban planning, advanced drainage systems, standardized weights and measures. Flourished in present-day Pakistan and northwest India.</p>
-        <div class="date">c. 3300 - 1300 BCE</div>
-      </div>
-      <div class="card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Chichen_Itza_3.jpg" alt="Maya Civilization" class="card-img">
-        <div class="card-number">06</div>
-        <h3>Maya Civilization</h3>
-        <p>Mesoamerican civilization known for hieroglyphic script, stunning art and architecture, advanced mathematics, precise calendar systems, and sophisticated astronomical knowledge.</p>
-        <div class="date">c. 2000 BCE - 1500 CE</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<footer>
-  <p style="font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem; background: linear-gradient(135deg, #5483B3 0%, #7DA0CA 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-    Made By Kashif Sayyad
-  </p>
-  <p>&copy; 2025 Pages of the Past. Preserving History, Science, Philosophy & Civilization.</p>
-</footer>
 
 <script>
 function showPage(pageId) {
-  const pages = document.querySelectorAll('.page-content');
-  pages.forEach(page => page.classList.remove('active'));
-  const selectedPage = document.getElementById(pageId);
-  if (selectedPage) {
-    selectedPage.classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
+  var pages = document.querySelectorAll('.page-content');
+  pages.forEach(function(p) { p.classList.remove('active'); });
+  var el = document.getElementById(pageId);
+  if (el) { el.classList.add('active'); window.scrollTo(0, 0); }
+}
+
+var counter = parseInt(localStorage.getItem('popCounter') || '12345', 10) + 1;
+localStorage.setItem('popCounter', String(counter));
+var digits = ('00000000' + counter).slice(-8).split('');
+var counterEl = document.getElementById('hitCounter');
+counterEl.innerHTML = digits.map(function(d) { return '<span>' + d + '</span>'; }).join('');
+document.getElementById('marqueeCount').textContent = ('00000000' + counter).slice(-8);
+
+var today = new Date();
+var mon = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][today.getMonth()];
+document.getElementById('todayDate').textContent = mon + ' ' + today.getDate() + ', ' + today.getFullYear();
+
+var guestbookData = [
+  { who: 'SpiritOf_1999', when: '08/14/2026', msg: 'I found this site at 3AM and now my lamp keeps flickering. 10/10 would haunt again.' },
+  { who: 'DeadPharaoh_xXx', when: '08/10/2026', msg: 'Cleopatra is my favorite. Also the corridor behind you is not empty.' }
+];
+
+function renderGuestbook() {
+  var html = '';
+  guestbookData.forEach(function(e) {
+    html += '<div class="guestbook-entry"><span class="who">' + e.who + '</span> <span class="when">(' + e.when + ')</span><br><span class="msg">' + e.msg + '</span></div>';
+  });
+  document.getElementById('guestbookEntries').innerHTML = html;
+}
+renderGuestbook();
+
+function signGuestbook() {
+  var name = document.getElementById('gbName').value.trim();
+  var msg = document.getElementById('gbMsg').value.trim();
+  if (!name || !msg) { alert('!!! The dead require a name AND a message. Do not test their patience !!!'); return; }
+  var now = new Date();
+  var when = (now.getMonth()+1) + '/' + now.getDate() + '/' + now.getFullYear();
+  guestbookData.unshift({ who: name, when: when, msg: msg });
+  renderGuestbook();
+  document.getElementById('gbName').value = '';
+  document.getElementById('gbMsg').value = '';
+  alert('!!! YOUR SOUL HAS BEEN IMPRINTED IN THE BOOK OF THE DEAD !!!');
+}
+
+function ringClick() {
+  alert('!!! You cannot leave the Web of the Damned. But you may visit another grave. ');
 }
 </script>
+
 </body>
 </html>
